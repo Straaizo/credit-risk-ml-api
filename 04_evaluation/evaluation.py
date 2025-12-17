@@ -24,15 +24,17 @@ from sklearn.metrics import (
 
 import joblib
 
+# Carga del dataset
 df = pd.read_parquet("full_dataset.parquet")
 model = joblib.load("model.pkl")
 
 df.shape
 
+# Separacion de variables predictoras y variable objetivo
 X = df.drop("TARGET", axis=1)
 y = df["TARGET"]
 
-# One-hot encoding
+
 X = pd.get_dummies(X, drop_first=True)
 
 # Limpiar nombres de columnas
@@ -41,6 +43,8 @@ X.columns = X.columns.str.replace(r'[^A-Za-z0-9_]+', '_', regex=True)
 # Manejo de nulos
 X = X.fillna(0)
 
+
+# Stratify=y mantiene la proporcion de clases 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2,
@@ -48,6 +52,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
+# Prediccion
 y_proba = model.predict_proba(X_test)[:, 1]
 y_pred = model.predict(X_test)
 
@@ -56,8 +61,10 @@ roc_auc
 
 confusion_matrix(y_test, y_pred)
 
+# Reporte completo de metricas 
 print(classification_report(y_test, y_pred))
 
+# Traduce la probabilidad del modelo en "APROBAR" o "RECHAZAR"
 def credit_decision(prob):
     if prob < 0.3:
         return "APROBAR"
