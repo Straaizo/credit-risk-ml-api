@@ -17,6 +17,7 @@ import pandas as pd
 from lightgbm import LGBMClassifier
 import joblib
 
+# Carga del dataset completo con todas las features
 df = pd.read_parquet("full_dataset.parquet")
 
 X.dtypes[X.dtypes == "object"]
@@ -35,10 +36,10 @@ model = LGBMClassifier(
 
 model.fit(X, y)
 
+# Guardado del modelo para la API
 joblib.dump(model, "model.pkl")
 
 
-
+# Descarga del modelo
 from google.colab import files
-
 files.download("model.pkl")
