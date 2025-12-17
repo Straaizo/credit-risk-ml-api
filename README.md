@@ -11,8 +11,24 @@ Una institución financiera busca mejorar su proceso de evaluación de solicitud
 lo que genera pérdidas económicas por incumplimientos y decisiones de aprobación subóptimas. 
 El objetivo del proyecto es automatizar y optimizar la predicción de riesgo de incumplimiento, ofreciendo información confiable para respaldar decisiones de crédito más seguras y rápidas.
 
+# 🎯 Objetivo del Proyecto
 
+El objetivo principal de este proyecto es desarrollar una API de Machine Learning capaz de predecir la probabilidad de incumplimiento de un cliente, a partir de información financiera y demográfica, permitiendo:
 
+- Automatizar el análisis de riesgo crediticio
+- Reducir decisiones manuales
+- Apoyar la toma de decisiones mediante reglas de negocio
+
+# 🛠️ Herramientas
+
+- Python 3
+- Pandas / NumPy 
+- Scikit-learn 
+- LightGBM 
+- Joblib 
+- FastAPI 
+- Pydantic
+- Uvicorn
 
 # 📁 Estructura del repositorio
 
