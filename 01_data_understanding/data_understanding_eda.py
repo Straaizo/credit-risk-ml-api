@@ -18,10 +18,17 @@ from google.colab import files
 uploaded = files.upload()
 
 import pandas as pd
-
+# Carga el dataset principal en formato Parquet
+# Contiene informacion de las solicitudes de credito
 app = pd.read_parquet("application_.parquet")
+
+# Muestra la cantidad de filas y columnas del dataset
 app.shape
 
+# Analiza la distribucion de la variable TARGET
+# Devuelve proporciones en lugar de conteos
 app["TARGET"].value_counts(normalize=True)
 
+# Calcula el porcentaje de valores nulos por columna
+# Se ordena de mayor a menor para identificar las variables mas problematicas
 app.isna().mean().sort_values(ascending=False).head(20)
