@@ -21,18 +21,24 @@ uploaded = files.upload()
 
 import pandas as pd
 
-app = pd.read_parquet("application_.parquet")
-bureau = pd.read_parquet("bureau.parquet")
-prev = pd.read_parquet("previous_application.parquet")
-inst = pd.read_parquet("installments_payments.parquet")
-pos = pd.read_parquet("POS_CASH_balance.parquet")
+# Carga de las distintas tablas 
+# Cada una aporta informacion distinta sobre el cliente
+app = pd.read_parquet("application_.parquet")                # Dato actual de credito
+bureau = pd.read_parquet("bureau.parquet")                   # Historial crediticio
+prev = pd.read_parquet("previous_application.parquet")       # Solicitudes anteriores
+inst = pd.read_parquet("installments_payments.parquet")      # Pagos de cuotas
+pos = pd.read_parquet("POS_CASH_balance.parquet")            # Creditos de consumo
 
+
+# Se resume la informacion para tener una fila por solicitante
 bureau_agg = bureau.groupby("SK_ID_CURR").agg({
     "AMT_CREDIT_SUM": "sum",
     "AMT_CREDIT_SUM_DEBT": "sum",
     "DAYS_CREDIT": "mean"
 }).reset_index()
 
+# Agregacion de solicitudes de credito previas
+# Analiza el comportamiento historico del cliente
 prev_agg = prev.groupby("SK_ID_CURR").agg({
     "AMT_APPLICATION": "mean",
     "AMT_CREDIT": "mean",
@@ -51,13 +57,16 @@ pos_agg = pos.groupby("SK_ID_CURR").agg({
     "CNT_INSTALMENT_FUTURE": "mean"
 }).reset_index()
 
+# Copia del dataset principal como base del dataset final
 df = app.copy()
 
+# Union de las tablas agregadas
 df = app.merge(bureau_agg, on="SK_ID_CURR", how="left")
 df = df.merge(prev_agg, on="SK_ID_CURR", how="left")
 df = df.merge(inst_agg, on="SK_ID_CURR", how="left")
 df = df.merge(pos_agg, on="SK_ID_CURR", how="left")
 
+# Guardado del dataset final con todas las features generadas
 df.to_parquet("full_dataset.parquet")
 
 from google.colab import files
