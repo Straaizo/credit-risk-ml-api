@@ -9,7 +9,6 @@
 
 Una institución financiera busca mejorar su proceso de evaluación de solicitudes de crédito. Actualmente, el análisis de riesgo se realiza de forma manual o con métodos poco eficientes, 
 lo que genera pérdidas económicas por incumplimientos y decisiones de aprobación subóptimas. 
-El objetivo del proyecto es automatizar y optimizar la predicción de riesgo de incumplimiento, ofreciendo información confiable para respaldar decisiones de crédito más seguras y rápidas.
 
 # 🎯 Objetivo del Proyecto
 
