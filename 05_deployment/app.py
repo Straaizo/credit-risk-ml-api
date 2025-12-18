@@ -34,11 +34,10 @@ def run_prediction(application: CreditApplication):
     return {
         "probabilidad_incumplimiento": round(float(prob), 4),
         "decision": decision
+
     }
 
-@app.post("/evaluate_risk")
-def evaluate_risk(application: CreditApplication):
-    return run_prediction(application)
+# Aplicacion POST para poder ver en la URL /DOCS 
 
 @app.post("/predict")
 def predict(application: CreditApplication):
