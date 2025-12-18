@@ -10,14 +10,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "artifacts" / "model.pkl"
 COLUMNS_PATH = BASE_DIR / "artifacts" / "columns.json"
 
+# Iniciar api
 app = FastAPI(
     title="Credit Risk API",
     description="Predicción de riesgo de incumplimiento",
     version="1.0"
 )
 
+# Carga del modelo al iniciar 
 model = joblib.load(MODEL_PATH)
-
+# Define decision crediticia
 def run_prediction(application: CreditApplication):
     data = application.dict()
 
@@ -30,7 +32,7 @@ def run_prediction(application: CreditApplication):
         decision = "REVISION_MANUAL"
     else:
         decision = "RECHAZAR"
-
+# Retorna respuesta en json
     return {
         "probabilidad_incumplimiento": round(float(prob), 4),
         "decision": decision
