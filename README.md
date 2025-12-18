@@ -84,5 +84,4 @@ columns.json: esquema de variables esperado por el modelo.
 Lista las dependencias necesarias para ejecutar el proyecto y la API.
 
 Esta estructura refleja un flujo completo de CRISP-DM, separando claramente análisis, preparación, modelado, evaluación y despliegue.
-Está bien hecha, defendible y lista para evaluación 
 
