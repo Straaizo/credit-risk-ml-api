@@ -18,7 +18,7 @@ El objetivo principal de este proyecto es desarrollar una API de Machine Learnin
 - Reducir decisiones manuales
 - Apoyar la toma de decisiones mediante reglas de negocio
 
-# 🛠️ Herramientas
+# 🛠️ Tecnologias Utilizadas.
 
 - Python 3
 - Pandas / NumPy 
